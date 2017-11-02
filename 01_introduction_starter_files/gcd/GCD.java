@@ -2,16 +2,15 @@ import java.util.*;
 
 public class GCD {
   private static int gcd_naive(int a, int b) {
-    int current_gcd = 1;
-    for(int d = 2; d <= a && d <= b; ++d) {
-      if (a % d == 0 && b % d == 0) {
-        if (d > current_gcd) {
-          current_gcd = d;
-        }
-      }
+    int min=Math.min(a,b);
+    int max=Math.max(a,b);
+    while(min!=0)
+    {
+      int tmp=max;
+      max=min;
+      min=tmp%min;
     }
-
-    return current_gcd;
+    return max;
   }
 
   public static void main(String args[]) {
