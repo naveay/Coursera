@@ -2,10 +2,18 @@ import java.util.Scanner;
 
 public class Fibonacci {
   private static long calc_fib(int n) {
-    if (n <= 1)
-      return n;
-
-    return calc_fib(n - 1) + calc_fib(n - 2);
+    if(n==0)
+      return 0;
+    long pre=0;
+    long cur=1;
+    n-=1;
+    while(n>0)
+    {
+      cur+=pre;
+      pre=cur-pre;
+      n--;
+    }
+    return cur;
   }
 
   public static void main(String args[]) {
