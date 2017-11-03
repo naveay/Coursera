@@ -2,24 +2,49 @@ import java.util.*;
 
 public class FibonacciPartialSum {
     private static long getFibonacciPartialSumNaive(long from, long to) {
-        long sum = 0;
+        return (10+help(to)- (from-1<0?0:help(from-1)))%10;
+    }
+    private static long help(long n) {
+        if(n==0)
+            return 0;
+        long pre=0;
+        long cur=1;
+        int count=0;
+        long tmp=n-1;
+        long sum=1;
+        do
+        {
+            cur+=pre;
+            pre=cur-pre;
+            cur=cur%10;
+            pre=pre%10;
+            sum+=cur;
+            count++;
+            tmp--;
+            if(tmp==0)
+              return sum%10;
+        }while(cur!=1||pre!=0);
+        sum--;
+        sum=((n/count)%10)*(sum%10);
+        n=n%count;
 
-        long current = 0;
-        long next  = 1;
-
-        for (long i = 0; i <= to; ++i) {
-            if (i >= from) {
-                sum += current;
-            }
-
-            long new_current = next;
-            next = next + current;
-            current = new_current;
+        pre=0;
+        cur=1;
+        if(n==0)
+          return sum%10;
+        n-=1;
+        sum+=1;
+        while(n>0)
+        {
+            cur+=pre;
+            pre=cur-pre;
+            cur=cur%10;
+            pre=pre%10;
+            sum+=cur;
+            n--;
         }
-
         return sum % 10;
     }
-    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         long from = scanner.nextLong();
@@ -27,4 +52,3 @@ public class FibonacciPartialSum {
         System.out.println(getFibonacciPartialSumNaive(from, to));
     }
 }
-
