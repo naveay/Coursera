@@ -8,20 +8,21 @@ public class FibonacciSumLastDigit {
         long cur=1;
         int count=0;
         long tmp=n-1;
-        int sum=1;
+        long sum=1;
         do
         {
             cur+=pre;
             pre=cur-pre;
-            cur=cur%m;
-            pre=pre%m;
+            cur=cur%10;
+            pre=pre%10;
             sum+=cur;
             count++;
             tmp--;
             if(tmp==0)
               return sum%10;
         }while(cur!=1||pre!=0);
-        sum=(n/count)%10*(sum%10);
+        sum--;
+        sum=((n/count)%10)*(sum%10);
         n=n%count;
 
         pre=0;
@@ -34,8 +35,8 @@ public class FibonacciSumLastDigit {
         {
             cur+=pre;
             pre=cur-pre;
-            cur=cur%m;
-            pre=pre%m;
+            cur=cur%10;
+            pre=pre%10;
             sum+=cur;
             n--;
         }
