@@ -2,23 +2,46 @@ import java.util.*;
 
 public class FibonacciSumLastDigit {
     private static long getFibonacciSumNaive(long n) {
-        if (n <= 1)
-            return n;
+        if(n==0)
+            return 0;
+        long pre=0;
+        long cur=1;
+        int count=0;
+        long tmp=n-1;
+        int sum=1;
+        do
+        {
+            cur+=pre;
+            pre=cur-pre;
+            cur=cur%m;
+            pre=pre%m;
+            sum+=cur;
+            count++;
+            tmp--;
+            if(tmp==0)
+              return sum%10;
+        }while(cur!=1||pre!=0);
+        sum=(n/count)%10*(sum%10);
+        n=n%count;
 
-        long previous = 0;
-        long current  = 1;
-        long sum      = 1;
-
-        for (long i = 0; i < n - 1; ++i) {
-            long tmp_previous = previous;
-            previous = current;
-            current = tmp_previous + current;
-            sum += current;
+        pre=0;
+        cur=1;
+        if(n==0)
+          return sum%10;
+        n-=1;
+        sum+=1;
+        while(n>0)
+        {
+            cur+=pre;
+            pre=cur-pre;
+            cur=cur%m;
+            pre=pre%m;
+            sum+=cur;
+            n--;
         }
-
         return sum % 10;
     }
-    
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         long n = scanner.nextLong();
@@ -26,4 +49,3 @@ public class FibonacciSumLastDigit {
         System.out.println(s);
     }
 }
-
