@@ -2,8 +2,14 @@ import java.util.Scanner;
 
 public class Change {
     private static int getChange(int m) {
-        //write your code here
-        return m;
+        int[] coins={10,5,1};
+        int num=0;
+        for(int i: coins)
+        {
+          num+=m/i;
+          m%=i;
+        }
+        return num;
     }
 
     public static void main(String[] args) {
@@ -13,4 +19,3 @@ public class Change {
 
     }
 }
-

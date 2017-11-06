@@ -1,10 +1,25 @@
 import java.util.Scanner;
-
+import java.util.*;
 public class FractionalKnapsack {
     private static double getOptimalValue(int capacity, int[] values, int[] weights) {
         double value = 0;
-        //write your code here
-
+        PriorityQueue<Integer> queue=new PriorityQueue<Integer>((a,b)->(values[b]*10000/weights[b]- values[a]*10000/weights[a]));
+        for(int i=0;i<values.length;i++)
+            queue.add(i);
+        while(capacity>0&&queue.size()>0)
+        {
+            int next=queue.poll();
+            if(weights[next]<=capacity)
+            {
+                value+=values[next];
+                capacity-=weights[next];
+            }
+            else
+            {
+                value+=((double)values[next]*capacity)/weights[next];
+                capacity=0;
+            }
+        }
         return value;
     }
 
@@ -20,4 +35,4 @@ public class FractionalKnapsack {
         }
         System.out.println(getOptimalValue(capacity, values, weights));
     }
-} 
+}
