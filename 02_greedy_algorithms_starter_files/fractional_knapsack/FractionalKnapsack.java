@@ -3,7 +3,7 @@ import java.util.*;
 public class FractionalKnapsack {
     private static double getOptimalValue(int capacity, int[] values, int[] weights) {
         double value = 0;
-        PriorityQueue<Integer> queue=new PriorityQueue<Integer>((a,b)->(values[b]*10000/weights[b]- values[a]*10000/weights[a]));
+        PriorityQueue<Integer> queue=new PriorityQueue<Integer>((a,b)->((double)values[b]/weights[b]>(double)values[a]/weights[a]?1:-1));
         for(int i=0;i<values.length;i++)
             queue.add(i);
         while(capacity>0&&queue.size()>0)
