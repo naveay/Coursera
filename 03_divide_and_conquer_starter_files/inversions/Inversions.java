@@ -11,6 +11,30 @@ public class Inversions {
         numberOfInversions += getNumberOfInversions(a, b, left, ave);
         numberOfInversions += getNumberOfInversions(a, b, ave, right);
         //write your code here
+        int index=ave;
+        for(int i=left;i<ave;i++)
+        {
+            while(a[i]>b[index]&&index<right)
+                index++;
+            numberOfInversions+=(index-ave);
+        }
+        int index1 = left;
+        int index2=  ave;
+        while(index1+index2-ave<right)
+        {
+            if(a[index1]<=a[index2]||index2==right)
+            {
+                b[index1+index2-ave]=a[index1];
+                index1++;
+            }
+            else
+            {
+                b[index1+index2-ave]=a[index2];
+                index2++;
+            }
+        }
+        for(int i=left;i<right;i++)
+          a[i]=b[i];
         return numberOfInversions;
     }
 
@@ -25,4 +49,3 @@ public class Inversions {
         System.out.println(getNumberOfInversions(a, b, 0, a.length));
     }
 }
-
