@@ -2,11 +2,35 @@ import java.util.Scanner;
 
 public class PointsAndSegments {
 
-    private static int[] fastCountSegments(int[] starts, int[] ends, int[] points) {
-        int[] cnt = new int[points.length];
-        //write your code here
-        return cnt;
-    }
+
+private static int[] fastCountSegments(int[] starts, int[] ends, int[] points) {
+      Integer[] cnt = new Integer[points.length];
+      //write your code here
+      for(int i=0;i<points.length;i++)
+        cnt[i]=i;
+      Arrays.sort(starts);
+      Arrays.sort(ends);
+      Arrays.sort(cnt,new Comparator<Integer>() {
+        public int compare(Integer a, Integer b)
+        {
+          return points[a]-points[b];
+        }
+      });
+      int index1=0,index2=0;
+      for(int i=0;i<points.length;i++)
+      {
+        while(index1<starts.length&&starts[index1]<=points[cnt[i]])
+        {
+          index1++;
+        }
+        while(index2<ends.length&&ends[index2]<points[cnt[i]])
+        {
+          index2++;
+        }
+        points[cnt[i]]=index1-index2;
+      }
+      return points;
+  }
 
     private static int[] naiveCountSegments(int[] starts, int[] ends, int[] points) {
         int[] cnt = new int[points.length];
@@ -42,4 +66,3 @@ public class PointsAndSegments {
         }
     }
 }
-
