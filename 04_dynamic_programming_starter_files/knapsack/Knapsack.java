@@ -4,14 +4,17 @@ public class Knapsack {
     static int optimalWeight(int W, int[] w) {
         //write you code here
         int[] dp=new int[W+1];
-        f
-        int result = 0;
-        for (int i = 0; i < w.length; i++) {
-          if (result + w[i] <= W) {
-            result += w[i];
-          }
+        for(int _w:w)
+        {
+            for(int i=W;i>=0;i--)
+            {
+                if(i>=_w)
+                {
+                    dp[i]=Math.max(dp[i],dp[i-_w]+_w);
+                }
+            }
         }
-        return result;
+        return dp[W];
     }
 
     public static void main(String[] args) {
